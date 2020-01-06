@@ -1,0 +1,48 @@
+.accl2c-submenumd{
+    position: absolute;
+    z-index: 10;
+    width: 180px;
+    left: 0;
+    top:60px;
+    .ul-first{
+        background: #fff;
+        position: relative;
+        .li-first{
+            line-height: 45px;
+            margin: 0 20px;
+            border-bottom: 1px solid #eee;
+            font-size: 16px;
+            .icon{
+                vertical-align: middle;
+                width:30px;
+                height:30px;
+                display:inline-block;
+                background: url("./../img/sprit01.png") no-repeat -30px 0;
+            }
+            .middle{
+                width:0;
+                height: 45px;
+                display: inline-block;
+                vertical-align: middle;
+            }
+            a{
+                padding: 0 10px;
+                color:#555;
+                font-weight: 200;
+            }
+            .second-listbox{
+                height:383px;
+                width:180px;
+                display: none;
+                position: absolute;
+                left: 160px;
+                top:0;
+                background: #fff;
+                color:#222;
+            }
+            .active{
+                display: block;
+            }
+        }
+    }
+}

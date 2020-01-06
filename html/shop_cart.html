@@ -7,6 +7,7 @@
     <title>购物车</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/shop_cart.css">
+    <link rel="stylesheet" href="../css/nav.css">
 </head>
 <body>
 
@@ -30,11 +31,18 @@
         $("header").find("#cart").css({display:"none"});
     });
     $("nav").load("http://localhost:82/html/nav.html",function(){
-        $("nav")
+        $("nav").find(".nav_list_flex").hover(function(){
+            $(this).find(".accl2c-submenumd").css({
+                display:"block"
+            })
+        },function(){
+            $(this).find(".accl2c-submenumd").css({
+                display:"none"
+            })
+        })
     });
     // $("#guess_u_like").load("http://localhost:82/html/guess_u_like.html");
     $("#footer").load("http://localhost:82/html/footer.html");
-
 
 </script>
 </html>

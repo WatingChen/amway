@@ -126,6 +126,7 @@ header{
             }
         }
         .delivery-to{
+            display: none;
             position: absolute;
             left:272px;
             top:55px;
@@ -144,16 +145,16 @@ header{
                 }
                 a{
                     color:#088ec3;
-                    
+
                 }
             }
             .area-shi-ul{
                 font:14px/38px "";
                 width:550px;
-
+                overflow: hidden;
                 li{
                     float: left;
-                    padding: 10px;
+                    padding:0 20px;
                     .areas-v{
                         padding:0 5px;
                     }
@@ -164,10 +165,12 @@ header{
 }
 
 nav{
+    position: relative;
     height:60px;
     background: #fff;
     font:14px/60px "";
     .nav_list_flex{
+        position: relative;
         float: left;
         width:180px;
         display: flex;
@@ -330,17 +333,17 @@ nav{
                     margin: 0 7px;
                 }
                 a:nth-child(1){
-                    background-position: -60px 0;
+                    background-position: -60px -5px;
                     margin-left:0;
                 }
                 a:nth-child(2){
-                    background-position: -60px -45px;
+                    background-position: -60px -55px;
                 }
                 a:nth-child(3){
-                    background-position: -60px -90px;
+                    background-position: -60px -105px;
                 }
                 a:nth-child(4){
-                    background-position: -60px -135px;
+                    background-position: -60px -155px;
                 }
             }
         }
