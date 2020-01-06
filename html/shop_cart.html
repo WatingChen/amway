@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>购物车</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/shop_cart.css">
+</head>
+<body>
+
+    <div id="header"></div>
+    <header></header>
+    <div id="nav"></div>
+    <nav></nav>
+
+    <section id="shop_cart">
+        <div class="margin">
+            
+        </div>
+    </section>
+
+    <div id="footer"></div>
+</body>
+<script src="../libs/jquery.js"></script>
+<script>
+
+    $("header").load("http://localhost:82/html/header.html",function(){
+        $("header").find("#cart").css({display:"none"});
+    });
+    $("nav").load("http://localhost:82/html/nav.html",function(){
+        $("nav")
+    });
+    // $("#guess_u_like").load("http://localhost:82/html/guess_u_like.html");
+    $("#footer").load("http://localhost:82/html/footer.html");
+
+
+</script>
+</html>

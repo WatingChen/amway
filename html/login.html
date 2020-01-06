@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+    <div id="header"></div>
+    <header>
+        <div class="margin">
+            <a href="##" class="logo"><img src="../img/Amway-Logo.png" alt="" class="logo"></a>
+            
+            <div class="login">
+                <p id="header_login">登录安利云购</p>
+            </div>
+        </div>
+    </header>
+
+    
+    <section id="banner">
+        <div class="banner_login">
+            <h3>
+                <span class="user_login login_active">账户登录</span>
+                <span class="pipe">|</span>
+                <span class="register">账户注册</span>
+            </h3>
+            <div class="login_box">
+                <form action="">
+                    <input type="text" id="user" placeholder="请输入手机号/安利号码">
+                    <input type="text" id="pass" placeholder="请输入密码">
+                    <p>点击"同意并登录"表示我已阅读并同意《<a href="##" class="policy-item">隐私政策</a>》的所有内容。</p>
+                    <input type="button" id="btn" value="同意并登录">
+                </form>
+                <a href="##" class="forget-password">忘记密码</a>
+                <a href="##" class="forget-ada">忘记安利号码</a>
+                <a href="##" class="login-explian">登录说明</a>
+            </div>
+            <!-- <div class="register_box">
+                <form action="">
+                    <input type="text" id="user" placeholder="请输入用户名">
+                    <input type="text" id="pass" placeholder="请输入密码">
+                    <input type="text" id="repeat_pass" placeholder="请确认密码">
+                    <input type="button" id="btn" value="确认注册">
+                </form>
+            </div> -->
+        </div>
+    </section>
+
+    <div id="footer"></div>
+</body>
+<script src="../libs/jquery.js"></script>
+<script>
+    $("#footer").load("http://localhost:82/html/footer.html");
+</script>
+</html>

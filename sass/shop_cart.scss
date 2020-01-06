@@ -1,0 +1,30 @@
+header{
+    .margin{
+        .login{
+            width: 300px;
+            .touxiang{
+                margin:0 10px;
+            }
+        }
+    }
+}
+#nav{
+    height:60px;
+}
+
+nav{
+    position: fixed;
+    top:70px;
+    left:0;
+    right:0;
+    z-index: 999;
+}
+
+#shop_cart{
+    margin:20px 0;
+    .margin{
+        
+        height:500px;
+        background: #fff;
+    }
+}
