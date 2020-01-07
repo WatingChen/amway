@@ -32,7 +32,6 @@ header{
     .margin{
         position: relative;
         height:70px;
-        overflow: hidden;
         color:#fff;
         a{color:#fff;}
         .logo{
@@ -91,17 +90,33 @@ header{
         }
         .login{
             float: right;
-            width:350px;
+            width:360px;
             font-size: 14px;
             .login_flex{
                 display: flex;
                 width:100%;
-                // justify-content: space-between;
+                justify-content: center;
                 align-items: center;
                 .welcome{
                     display: block;
+                    a{
+                        color:#99f;
+                    }
+                }
+                .welcome_1{
+                    display: none;
+                    span{
+                        color: #f00;
+                    }
+                    .exit{
+                        color:#99f;
+                        cursor: pointer;
+                    }
                 }
                 .touxiang{
+                    margin: 0 20px;
+                    width: 36px;
+                    height: 36px;
                     display: block;
                 }
                 .cart{
@@ -129,7 +144,8 @@ header{
         .delivery-to{
             display: none;
             position: absolute;
-            left:272px;
+            z-index: 999;
+            left:110px;
             top:55px;
             background: #fff;
             color:#555;
@@ -325,6 +341,17 @@ nav{
                 span{
                     color: red;
                     font: 18px/2 "";
+                }
+                #add{
+                    border: none;
+                    background: none;
+                    color:#555;
+                    border:1px solid #eee;
+                    width: 100px;
+                    height: 30px;
+                    border-radius: 15px;
+                    cursor: pointer;
+                    outline: none;
                 }
             }
         }
