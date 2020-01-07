@@ -18,6 +18,8 @@
 
     <section id="guess_u_like"></section>
 
+    <section id="row"></section>
+
     <div id="footer"></div>
 </body>
 <script src="../libs/jquery.js"></script>
@@ -55,11 +57,61 @@
                     </li>`;
         }
         $(".delivery-to").children(".area-shi-ul").html(str);
+
+        onscroll = function(){
+            if($(document).scrollTop() > 70){
+                $("header").find(".header_local").css({display:"none"}).end().find(".login").css({display:"none"});
+                // console.log($("header").find(".nav_search").length)
+                if(!$("header").find(".nav_search").length){
+                    $("header").children(".margin").append($("nav").find(".nav_search"));
+                }else{
+                    $("header").find(".nav_search").css({
+                        display:"block"
+                    })
+                }
+            }else if($(document).scrollTop() < 70){
+                $("header").find(".header_local").css({display:"block"}).end().find(".login").css({display:"block"}).end().find(".nav_search").css({
+                    display:"none"
+                })
+            }
+        }
     });
+
+
+
     $("nav").load("http://localhost:82/html/nav.html",function(){
         
     });
-    $("#guess_u_like").load("http://localhost:82/html/guess_u_like.html");
+
+
+
+    $("#guess_u_like").load("http://localhost:82/html/guess_u_like.html",function(){
+        $.ajax({
+            url:"http://localhost:82/json/guess_u_like.json",
+            success:function(res){
+                let myres = JSON.parse(res);
+                console.log(myres);
+                let str = "";
+                let length = myres.length;
+                for(var i=0;i<length;i++){
+                    str += `<div class="guess_goods_box">
+                                <div class="guess_goods">
+                                    <img src="${myres[i].img}" alt="" class="guess_goods_img">
+                                </div>
+                                <div class="guess_goods_msg">
+                                    <p>${myres[i].name}</p>
+                                    <span>￥${myres[i].price}.00</span>
+                                </div>
+                            </div>`;
+                }
+                $("#guess_u_like").children(".margin").append(str);
+
+            }
+        })
+    });
+
+
+
     $("#footer").load("http://localhost:82/html/footer.html");
 
 

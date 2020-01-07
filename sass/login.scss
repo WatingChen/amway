@@ -26,6 +26,12 @@ header{
         h3{
             font: 300 18px/2 "";
             text-align: center;
+            .user_login{
+                cursor: pointer;
+            }
+            .register{
+                cursor: pointer;
+            }
             .login_active{
                 color:#004285;
             }
@@ -53,12 +59,13 @@ header{
                         color:#0384e5;
                     }
                 }
-                #btn{
+                #login_btn{
                     background: #d0d3d9;
                     color:#fff;
                     border:none;
                     border-radius: 2px;
                     outline: none;
+                    cursor: pointer;
                 }
                 .active{
                     background:#004285;
@@ -88,12 +95,13 @@ header{
                         color:#0384e5;
                     }
                 }
-                #btn{
+                #register_btn{
                     background: #d0d3d9;
                     color:#fff;
                     border:none;
                     border-radius: 2px;
                     outline: none;
+                    cursor: pointer;
                 }
                 .active{
                     background:#004285;
