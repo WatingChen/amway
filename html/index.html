@@ -30,16 +30,53 @@
     class Home{
         constructor(){
             this.userAllMsg = localStorage.getItem("userMsg") ? JSON.parse(localStorage.getItem("userMsg")) : [{pass:"",onoff:0}];
+            this.guess_u_like = document.querySelector("#guess_u_like");
+            
             
             
             this.init();
         }
         addEvent(){
-            $("#guess_u_like").find("#add").click(function(){
-
-            })
+            this.userName = document.querySelector("#userName");
+            var that = this;
+            this.guess_u_like.addEventListener("click",function(eve){
+                let e = eve || window.event;
+                let target = e.target || e.srcElement;
+                if(target.id === "add"){
+                    that.goodsid = target.parentNode.getAttribute("goodsId");
+                    that.setMGLStorage();
+                }
+            },false);
         }
+        setMGLStorage(){
+            var str = "";
+            str = this.userName.innerHTML + "goodsMsg";
+            this.mygoods = localStorage.getItem(str) ? JSON.parse(localStorage.getItem(str)) : [{user:""}];
+            [{user:""},{goodsid:"",num:""}]
+            // this.mygoods = localStorage.getItem(str) ? JSON.parse(localStorage.getItem(str)) : [];
+            var goodsLength = this.mygoods.length;
+            var i = 0;
+            var onoff = this.mygoods.some((value,index)=>{
+                i = index;
+                return value.id == this.goodsid;
+            })
+            if(onoff){
+                this.mygoods[i].num++;
+            }else{
+                if(!this.mygoods[0].user){
+                    this.mygoods[0] = {
+                        user:this.userName.innerHTML
+                    }
+                }
+                this.mygoods.push({
+                    id:this.goodsid,
+                    num:1
+                });
+            }
+            
+            localStorage.setItem(str,JSON.stringify(this.mygoods));
 
+        }
         init(){
             var that = this;
             $("header").load("http://localhost:82/html/header.html",function(){
@@ -132,11 +169,11 @@
                         let str = "";
                         let length = myres.length;
                         for(var i=0;i<length;i++){
-                            str += `<div class="guess_goods_box" id="${myres[i].goodsid}">
+                            str += `<div class="guess_goods_box">
                                         <div class="guess_goods">
                                             <img src="${myres[i].img}" alt="" class="guess_goods_img">
                                         </div>
-                                        <div class="guess_goods_msg">
+                                        <div class="guess_goods_msg"  goodsId="${myres[i].goodsid}">
                                             <p>${myres[i].name}</p>
                                             <span>￥${myres[i].price}.00</span>
                                             <input type="button" id="add" value="添加到购物车">
