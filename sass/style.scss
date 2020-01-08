@@ -322,6 +322,9 @@ nav{
                 background: url("../img/guess_u_like.png") no-repeat;
             }
         }
+        a{
+            display: inline-block;
+        }
         .guess_goods_box{
             float: left;
             width:263px;
@@ -337,21 +340,25 @@ nav{
             .guess_goods_msg{
                 width:153px;
                 height: 84px;
+                p{
+                    height: 42px;
+                    color:#222;
+                }
                 span{
                     color: red;
                     font: 18px/2 "";
                 }
-                #add{
-                    border: none;
-                    background: none;
-                    color:#555;
-                    border:1px solid #eee;
-                    width: 100px;
-                    height: 30px;
-                    border-radius: 15px;
-                    cursor: pointer;
-                    outline: none;
-                }
+                // #add{
+                //     border: none;
+                //     background: none;
+                //     color:#555;
+                //     border:1px solid #eee;
+                //     width: 100px;
+                //     height: 30px;
+                //     border-radius: 15px;
+                //     cursor: pointer;
+                //     outline: none;
+                // }
             }
         }
     }

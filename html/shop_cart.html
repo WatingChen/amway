@@ -205,7 +205,7 @@
                 var target = e.target || e.srcElement;
                 if(target.className === "iptNum"){
                     that.indexId = target.parentNode.getAttribute("myindex");
-                    that.goodsMsg[that.indexId].num = that.ipts[that.indexId].value;
+                    that.goodsMsg[that.indexId].num = that.ipts[that.indexId-1].value;
                     localStorage.setItem(that.str,JSON.stringify(that.goodsMsg));
                     that.display();
                 }

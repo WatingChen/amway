@@ -5,60 +5,70 @@
     "price":"560",
     "goodsid":2020001,
     "keywords":"功能保健系列",
-    "netContent":"770克"
+    "netContent":"770克",
+    "brand":"纽崔莱"
 },
 {
-    "img":"https://staticd.amway.com.cn/medias/sys_master/images/images/hff/h5a/9015553196062/39605-1-1200Wx1200H-100Wx100H.jpg",
-    "name":"雅蜜®润肤沐浴露 250ML",
-    "price":"38",
-    "goodsid":2020002
-},
-{
-    "img":"https://staticd.amway.com.cn/medias/sys_master/images/images/h7a/h40/8807989248030/40306-1-1200Wx1200H-100Wx100H.jpg",
+    "img":"https://staticd.amway.com.cn/medias/sys_master/images/images/hb7/hee/8807989837854/40306-1-1200Wx1200H.jpg",
     "name":"雅姿®水润保湿洁面乳",
     "price":"248",
-    "goodsid":2020003
+    "goodsid":2020002,
+    "keywords":"水润保湿系列",
+    "netContent":"125克",
+    "brand":"雅姿"
 },
 {
-    "img":"https://staticd.amway.com.cn/medias/sys_master/images/images/h62/h9c/9015555555358/38124-1-1200Wx1200H-100Wx100H.jpg",
-    "name":"雅蜜®爽肤沐浴露 750ML",
-    "price":"95",
-    "goodsid":2020004
-},
-{
-    "img":"https://staticd.amway.com.cn/medias/sys_master/images/images/hfc/h08/8817670324254/2536-1-1200Wx1200H-100Wx100H.jpg",
+    "img":"https://staticd.amway.com.cn/medias/sys_master/images/images/h6f/h78/8817670914078/2536-1-1200Wx1200H.jpg",
     "name":"安利优生活®浓缩厨房去渍剂",
     "price":"43",
-    "goodsid":2020005
+    "goodsid":2020003,
+    "keywords":"功能保健系列",
+    "netContent":"770克",
+    "brand":"安利优生活"
 },
 {
-    "img":"https://staticd.amway.com.cn/medias/sys_master/images/images/hbc/h33/9015549263902/2532-1-1200Wx1200H-100Wx100H.jpg",
-    "name":"安利优生活®多效倍洁洗衣液",
-    "price":"75",
-    "goodsid":2020006
-},
-{
-    "img":"https://staticd.amway.com.cn/medias/sys_master/images/images/hac/h33/9015553982494/39604-1-1200Wx1200H-100Wx100H.jpg",
-    "name":"雅蜜®爽肤沐浴露 250ML",
-    "price":"40",
-    "goodsid":2020007
-},
-{
-    "img":"https://staticd.amway.com.cn/medias/sys_master/images/images/h63/h72/8813856882718/31094-1-1200Wx1200H-100Wx100H.jpg",
+    "img":"https://staticd.amway.com.cn/medias/sys_master/images/images/h53/h07/8813857472542/31094-1-1200Wx1200H.jpg",
     "name":"雅蜜®多用滋润条3.5g",
     "price":"74",
-    "goodsid":2020008
+    "goodsid":2020004,
+    "keywords":"水润保湿系列",
+    "netContent":"3.5克",
+    "brand":"雅蜜"
 },
 {
-    "img":"https://staticd.amway.com.cn/medias/sys_master/images/images/h49/h9a/8813861404702/38114-1-1200Wx1200H-710Wx710H.jpg",
+    "img":"https://staticd.amway.com.cn/medias/sys_master/images/images/h49/h9a/8813861404702/38114-1-1200Wx1200H.jpg",
     "name":"雅蜜®护手霜",
     "price":"95",
-    "goodsid":2020009
+    "goodsid":2020005,
+    "keywords":"水润保湿系列",
+    "netContent":"100克",
+    "brand":"雅蜜"
 },
 {
-    "img":"https://staticd.amway.com.cn/medias/sys_master/images/images/h44/h76/9015571087390/40437-1-1200Wx1200H-710Wx710H.jpg",
-    "name":"深层保湿面膜【2种包装可选】—30片装",
-    "price":"399",
-    "goodsid":2020010
+    "img":"https://staticd.amway.com.cn/medias/sys_master/images/images/h6f/h78/8817670914078/2536-1-1200Wx1200H.jpg",
+    "name":"安利优生活®浓缩厨房去渍剂",
+    "price":"46",
+    "goodsid":2020006,
+    "keywords":"功能保健系列",
+    "netContent":"500ml",
+    "brand":"安利优生活"
+},
+{
+    "img":"https://staticd.amway.com.cn/medias/sys_master/images/images/h53/h07/8813857472542/31094-1-1200Wx1200H.jpg",
+    "name":"雅蜜®多用滋润条3.5g",
+    "price":"77",
+    "goodsid":2020007,
+    "keywords":"功能保健系列",
+    "netContent":"3.5克",
+    "brand":"雅蜜"
+},
+{
+    "img":"https://staticd.amway.com.cn/medias/sys_master/images/images/h49/h9a/8813861404702/38114-1-1200Wx1200H.jpg",
+    "name":"雅蜜®护手霜",
+    "price":"98",
+    "goodsid":2020008,
+    "keywords":"功能保健系列",
+    "netContent":"120ml",
+    "brand":"雅蜜"
 }
 ]

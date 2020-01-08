@@ -18,6 +18,41 @@
 
     <section id="guess_u_like"></section>
 
+    <!-- <section id="brand1">
+        <div class="margin">
+            <div class="cat-name">
+                <h2 class="every_brand">
+                    纽崔莱
+                    <span>
+                        更多
+                        <i></i>
+                    </span>
+                </h2>
+            </div>
+            <div class="brand_content">
+                <div class="brand_img"><img src="https://staticd.amway.com.cn/medias/sys_master/images/images/h47/hea/8998011928606/PC-266-520.jpg" alt=""></div>
+                <div class="brand_some">
+                    <div class="brand_classes">
+                        <ul>
+                            <li>基础营养系列</li>
+                            <li>功能保健系列</li>
+                            <li>体重管理系列</li>
+                            <li>儿童成长系列</li>
+                        </ul>
+                    </div>
+                    <div class="brand_some_products">
+                        <ul>
+                            <li>基础营养系列</li>
+                            <li>功能保健系列</li>
+                            <li>体重管理系列</li>
+                            <li>儿童成长系列</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
     <section id="row"></section>
 
     <div id="footer"></div>
@@ -32,56 +67,17 @@
             this.userAllMsg = localStorage.getItem("userMsg") ? JSON.parse(localStorage.getItem("userMsg")) : [{pass:"",onoff:0}];
             this.guess_u_like = document.querySelector("#guess_u_like");
             
-            
-            
             this.init();
         }
         addEvent(){
             this.userName = document.querySelector("#userName");
             var that = this;
-            this.guess_u_like.addEventListener("click",function(eve){
-                let e = eve || window.event;
-                let target = e.target || e.srcElement;
-                if(target.id === "add"){
-                    that.goodsid = target.parentNode.getAttribute("goodsId");
-                    that.setMGLStorage();
-                }
-                // console.log(target.getAttribute("goodsid"));
-                if(target.className == "guess_goods_box"){
-                    that.clickgoodsid = target.getAttribute("goodsid");
-                    console.log(that.clickgoodsid);
-                }
-            },false);
-        }
-        setMGLStorage(){
-            var str = "";
-            str = this.userName.innerHTML + "goodsMsg";
-            this.mygoods = localStorage.getItem(str) ? JSON.parse(localStorage.getItem(str)) : [{user:""}];
-            [{user:""},{goodsid:"",num:""}]
-            // this.mygoods = localStorage.getItem(str) ? JSON.parse(localStorage.getItem(str)) : [];
-            var goodsLength = this.mygoods.length;
-            var i = 0;
-            var onoff = this.mygoods.some((value,index)=>{
-                i = index;
-                return value.id == this.goodsid;
+            $("#guess_u_like").on("click","#a_goodsid",function(){
+                localStorage.setItem("a_goodsid",$(this).attr("goodsid"));
+                open("goodsdetails.html","_blank");
             })
-            if(onoff){
-                this.mygoods[i].num++;
-            }else{
-                if(!this.mygoods[0].user){
-                    this.mygoods[0] = {
-                        user:this.userName.innerHTML
-                    }
-                }
-                this.mygoods.push({
-                    id:this.goodsid,
-                    num:1
-                });
-            }
-            
-            localStorage.setItem(str,JSON.stringify(this.mygoods));
-
         }
+
         init(){
             var that = this;
             $("header").load("http://localhost:82/html/header.html",function(){
@@ -180,16 +176,17 @@
                         let str = "";
                         let length = myres.length;
                         for(var i=0;i<length;i++){
-                            str += `<div class="guess_goods_box" goodsId="${myres[i].goodsid}">
-                                        <div class="guess_goods">
-                                            <img src="${myres[i].img}" alt="" class="guess_goods_img">
+                            str += `<a goodsId="${myres[i].goodsid}" id="a_goodsid">
+                                        <div class="guess_goods_box" >
+                                            <div class="guess_goods">
+                                                <img src="${myres[i].img}" alt="" class="guess_goods_img">
+                                            </div>
+                                            <div class="guess_goods_msg"  goodsId="${myres[i].goodsid}">
+                                                <p>${myres[i].name}</p>
+                                                <span>￥${myres[i].price}.00</span>
+                                            </div>
                                         </div>
-                                        <div class="guess_goods_msg"  goodsId="${myres[i].goodsid}">
-                                            <p>${myres[i].name}</p>
-                                            <span>￥${myres[i].price}.00</span>
-                                            <input type="button" id="add" value="添加到购物车">
-                                        </div>
-                                    </div>`;
+                                    </a>`;
                         }
                         $("#guess_u_like").children(".margin").append(str);
                         that.addEvent();

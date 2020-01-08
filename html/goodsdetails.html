@@ -17,7 +17,7 @@
     <section id="details">
         <div class="margin">
             <div class="header_nav">
-                <ul>
+                <!-- <ul>
                     <li><a href="index.html">首页</a></li>
                     <li>></li>
                     <li><a href="##">纽崔莱</a></li>
@@ -25,7 +25,7 @@
                     <li><a href="##">益生菌系列</a></li>
                     <li>></li>
                     <li class="active">纽崔莱复合益生菌固体饮料</li>
-                </ul>
+                </ul> -->
             </div>
             <div class="product_section">
                 <div class="product_img">
@@ -89,6 +89,7 @@
             this.product_section = document.querySelector(".product_section")
             this.product_img = this.product_section.children[0];
             this.product_msg = this.product_section.children[1];
+            this.header_nav = document.querySelector(".header_nav");
             
             this.init();
             this.ajax();
@@ -125,16 +126,19 @@
                 // var num = that.num.value;
                 // num = num>0 ? --num : 0;
                 // that.num.value = num;
-                that.num.value = that.num.value>0 ? --that.num.value : 0;
+                that.num.value = that.num.value>0 ? --that.num.value : 1;
             },false)
             this.add.addEventListener("click",function(){
                 that.num.value++;
             },false)
 
             this.add_cart.addEventListener("click",function(){
-                // ???????????????????????????????????that.product_goosid.innerHTML拿不到
+                that.goodsid = that.a_goodsid;
+                that.goodsNum = that.num.value;
+                // console.log(that.goodsid)
+                // console.log(that.goodsNum);
                 // that.goodsid = that.product_goosid.innerHTML;
-                // that.setMGLStorage();
+                that.setMGLStorage();
             },false)
 
         }
@@ -151,7 +155,11 @@
                 return value.id == this.goodsid;
             })
             if(onoff){
-                this.mygoods[i].num++;
+                if(this.goodsNum != 1){
+                    this.mygoods[i].num = this.mygoods[i].num * 1 + this.goodsNum*1;
+                }else{
+                    this.mygoods[i].num++;
+                }
             }else{
                 if(!this.mygoods[0].user){
                     this.mygoods[0] = {
@@ -160,7 +168,7 @@
                 }
                 this.mygoods.push({
                     id:this.goodsid,
-                    num:1
+                    num:this.goodsNum
                 });
             }
             
@@ -201,21 +209,28 @@
                 url:"http://localhost:82/json/guess_u_like.json",
                 success:function(res){
                     that.res = JSON.parse(res);
+                    that.a_goodsid = JSON.parse(localStorage.getItem("a_goodsid"));
+                    var i = 0;
+                    that.res.some((value,index)=>{
+                        i = index;
+                        return value.goodsid == that.a_goodsid;
+                    })
+                    // console.log(i);
                     var str = `<div class="m_img">
-                                    <img src="${that.res[0].img}" alt="" id="m_img">
+                                    <img src="${that.res[i].img}" alt="" id="m_img">
                                     <span class="mask"></span>
                                 </div>
                                 <div class="s_img">
-                                    <img src="${that.res[0].img}" alt="" id="s_img">
+                                    <img src="${that.res[i].img}" alt="" id="s_img">
                                 </div>
                                 <div class="l_img">
-                                    <img src="${that.res[0].img}" alt="" id="l_img">
+                                    <img src="${that.res[i].img}" alt="" id="l_img">
                                 </div>`;
                     that.product_img.innerHTML = str;
-                    var str1 = `<h2 class="product_name">${that.res[0].name}</h2>
-                                <p class="product_goosid">编&nbsp;&nbsp;号<span id="product_goosid">${that.res[0].goodsid}</span></p>
-                                <p class="product_netContent">净含量：${that.res[0].netContent}</p>
-                                <p class="product_price">￥${that.res[0].price}.00</p>
+                    var str1 = `<h2 class="product_name">${that.res[i].name}</h2>
+                                <p class="product_goosid">编&nbsp;&nbsp;号<span id="product_goosid">${that.res[i].goodsid}</span></p>
+                                <p class="product_netContent">净含量：${that.res[i].netContent}</p>
+                                <p class="product_price">￥${that.res[i].price}.00</p>
                                 <div id="promotion">
                                     <div class="tag_flag">促销</div>
                                     <div class="sop_promotion_contain">
@@ -227,7 +242,7 @@
                                     <div class="tex">购买数量：</div>
                                     <div class="buy_num">
                                         <button id="reduce">-</button>
-                                        <input type="text" id="num" value="0">
+                                        <input type="text" id="num" value="1">
                                         <button id="add">+</button>
                                     </div>
                                 </div>
@@ -243,7 +258,16 @@
                                     </div>
                                 </div>`;
                     that.product_msg.innerHTML = str1;
-
+                    var str2 = `<ul>
+                                    <li><a href="index.html">首页</a></li>
+                                    <li>></li>
+                                    <li><a href="##">${that.res[i].brand}</a></li>
+                                    <li>></li>
+                                    <li><a href="##">${that.res[i].keywords}</a></li>
+                                    <li>></li>
+                                    <li class="active">${that.res[i].name}</li>
+                                </ul>`;
+                    that.header_nav.innerHTML = str2;
                     that.addEvent();
                 }
             })
