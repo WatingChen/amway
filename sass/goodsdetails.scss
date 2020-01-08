@@ -33,15 +33,17 @@ nav{
         .product_section{
             padding:30px 10px;
             background: #fff;
+            display: flex;
             .product_img{
+                cursor: pointer;
                 position: relative;
                 width:438px;
+                box-sizing: border-box;
                 .m_img{
                     position: relative;
                     width:420px;
                     height: 420px;
                     #m_img{
-                        border: 1px solid #000;
                         display: block;
                         width:420px;
                         height: 420px;
@@ -49,13 +51,8 @@ nav{
                     .mask{
                         display: none;
                         position: absolute;
-                        // z-index: 100;
-                        // display: block;
                         left: 0;
                         top:0;
-                        // width:140px;
-                        // height: 140px;
-                        // background: rgba(0,0,0,.3);
                         border: 1px solid #aaa;
                     }
                 }
@@ -79,9 +76,149 @@ nav{
                     height: 420px;
                     background: #99f;
                     #l_img{
+                        position: absolute;
                         display: block;
                         width:1260px;
                         height: 1260px;
+                    }
+                }
+            }
+            .product_msg{
+                width:429px;
+                box-sizing: border-box;
+                padding-right:10px; 
+                .product_name{
+                    color:#555;
+                    font:700 24px/3 "";
+                }
+                p{
+                    font: 16px/2 "";
+                    color:#333;
+                }
+                .product_goosid{
+                    #product_goosid{
+                        padding: 0 25px;
+                    }
+                }
+                .product_price{
+                    font: 26px/3 "";
+                    color: #f11;
+                }
+                #promotion{
+                    background: #ffebcc;
+                    padding: 10px;
+                    .tag_flag{
+                        margin-bottom:5px; 
+                        color:#ee426a;
+                        font: 14px/18px "";
+                        height: 18px;
+                        border:1px solid #f2798a;
+                        width: 40px;
+                        text-align: center;
+                    }
+                    .sop_promotion_contain{
+                        display: flex;
+                        justify-content: space-between;
+                        .description{
+                            font: 14px/2 "";
+                            color: #555;
+                            width: 300px;
+                            .hot{
+                                color:#fe6700;
+                            }
+                        }
+                        .go_now{
+                            font: 16px/2 "";
+                            color:#fe6700;
+                            .hot{
+                                text-decoration: underline;
+                                color:#fe6700;
+                            }
+                        }
+                    }
+                }
+                #buy_num{
+                    overflow: hidden;
+                    color:#555;
+                    margin: 40px 0;
+                    padding: 0 10px;
+                    .tex{
+                        float: left;
+                        display: inline-block;
+                        font: 12px/35px "";
+                        
+                    }
+                    .buy_num{
+                        margin-left: 20px;
+                        float: left;
+                        border: 2px solid #efefef;
+                        display: inline-block;
+                        text-align: center;
+                        button{
+                            border: none;
+                            float: left;
+                            font: 24px/35px "";
+                            width: 35px;
+                            height: 35px;
+                            background: none;
+                            outline: none;
+                            color: #666;
+                            cursor: pointer;
+                        }
+                        #num{
+                            outline: none;
+                            text-align: center;
+                            border: none;
+                            float: left;
+                            width: 35px;
+                            height: 35px;
+                            color: #666;
+                        }
+                    }
+                }
+                #buy{
+                    display: flex;
+                    align-items: center;
+                    font:20px/1 "";
+                    .buy_now{
+                        background: #fde7ed;
+                        padding: 20px 30px;
+                        color:#ed174c;
+                        cursor: pointer;
+                    }
+                    .add_cart{
+                        position: relative;
+                        background: #eb174b;
+                        padding: 20px 30px 20px 60px;
+                        color:#fff;
+                        cursor: pointer;
+                        .cart{
+                            position: absolute;
+                            width: 30px;
+                            height: 30px;
+                            background: url('../img/cart_empty.png') no-repeat;
+                            background-size: contain;
+                            left: 20px;
+                            top:50%;
+                            transform: translateY(-50%);
+                        }
+                    }
+                    .collection{
+                        
+                        padding-left:30px;
+                        .heart{
+                            cursor: pointer;
+                            background: url('./../img/heart.png') no-repeat;
+                            background-size: contain;
+                            background-origin: content-box;
+                            width: 30px;
+                            height: 30px;
+                            padding: 5px 10px 0;
+                        }
+                        .text{
+                            font-size: 14px;
+                            padding: 5px 10px;
+                        }
                     }
                 }
             }

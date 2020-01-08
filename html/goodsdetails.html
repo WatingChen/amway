@@ -40,6 +40,38 @@
                         <img src="https://staticd.amway.com.cn/medias/sys_master/images/images/hcf/h3f/9016004837406/20495-1-1200Wx1200H.jpg" alt="" id="l_img">
                     </div> -->
                 </div>
+                <div class="product_msg">
+                    <!-- <h2 class="product_name">纽崔莱®多种植物蛋白粉770克</h2>
+                    <p class="product_goosid">编&nbsp;&nbsp;号<span id="product_goosid">0001</span></p>
+                    <p class="product_netContent">净含量：100</p>
+                    <p class="product_price">￥500.00</p>
+                    <div id="promotion">
+                        <div class="tag_flag">促销</div>
+                        <div class="sop_promotion_contain">
+                            <div class="description">营养从早开始套装“买7-1”优惠活动火热进行中，签约<span class="hot">最高</span>立省<span class="hot">848元</span>！</div>
+                            <div class="go_now"><a class="hot">立即参与</a> ></div>
+                        </div>
+                    </div>
+                    <div id="buy_num">
+                        <div class="tex">购买数量：</div>
+                        <div class="buy_num">
+                            <button id="reduce">-</button>
+                            <input type="text" id="num" value="0">
+                            <button id="add">+</button>
+                        </div>
+                    </div>
+                    <div id="buy">
+                        <div class="buy_now">立即购买</div>
+                        <div class="add_cart">
+                            <i class="cart"></i>
+                            加入购物车
+                        </div>
+                        <div class="collection">
+                            <div class="heart"></div>
+                            <div class="text">收藏</div>
+                        </div>
+                    </div> -->
+                </div>
             </div>
         </div>
     </section>
@@ -48,14 +80,15 @@
 </body>
 <script src="../libs/jquery.js"></script>
 <script src="../libs/ajax.js"></script>
-<!-- <script src="../js/index.js"></script> -->
 <script>
 
     class Details{
         constructor(){
             this.userAllMsg = localStorage.getItem("userMsg") ? JSON.parse(localStorage.getItem("userMsg")) : [{pass:"",onoff:0}];
             this.ul = document.querySelector(".header_nav").children[0];
-            this.product_img = document.querySelector(".product_section").children[0];
+            this.product_section = document.querySelector(".product_section")
+            this.product_img = this.product_section.children[0];
+            this.product_msg = this.product_section.children[1];
             
             this.init();
             this.ajax();
@@ -68,6 +101,15 @@
             this.mask = document.querySelector(".product_img .mask");
             this.l_img_box = document.querySelector(".product_img .l_img");
             this.l_img = document.querySelector(".product_img #l_img");
+
+            this.reduce = document.querySelector("#reduce");
+            this.add = document.querySelector("#add");
+            this.num = document.querySelector("#num");
+            this.add_cart = document.querySelector("#buy .add_cart");
+            this.product_goosid = document.querySelector("#buy #product_goosid");
+            this.userName = document.querySelector("#userName");
+            // console.log(this.userName.innerHTML)
+
             this.m_img.addEventListener("mouseover",function(){
                 that.show();
             },false);
@@ -78,28 +120,70 @@
                 var e = eve || window.event;
                 that.move(e);
             },false);
+
+            this.reduce.addEventListener("click",function(){
+                // var num = that.num.value;
+                // num = num>0 ? --num : 0;
+                // that.num.value = num;
+                that.num.value = that.num.value>0 ? --that.num.value : 0;
+            },false)
+            this.add.addEventListener("click",function(){
+                that.num.value++;
+            },false)
+
+            this.add_cart.addEventListener("click",function(){
+                // ???????????????????????????????????that.product_goosid.innerHTML拿不到
+                // that.goodsid = that.product_goosid.innerHTML;
+                // that.setMGLStorage();
+            },false)
+
+        }
+        setMGLStorage(){
+            var str = "";
+            str = this.userName.innerHTML + "goodsMsg";
+            this.mygoods = localStorage.getItem(str) ? JSON.parse(localStorage.getItem(str)) : [{user:""}];
+            [{user:""},{goodsid:"",num:""}]
+            // this.mygoods = localStorage.getItem(str) ? JSON.parse(localStorage.getItem(str)) : [];
+            var goodsLength = this.mygoods.length;
+            var i = 0;
+            var onoff = this.mygoods.some((value,index)=>{
+                i = index;
+                return value.id == this.goodsid;
+            })
+            if(onoff){
+                this.mygoods[i].num++;
+            }else{
+                if(!this.mygoods[0].user){
+                    this.mygoods[0] = {
+                        user:this.userName.innerHTML
+                    }
+                }
+                this.mygoods.push({
+                    id:this.goodsid,
+                    num:1
+                });
+            }
+            
+            localStorage.setItem(str,JSON.stringify(this.mygoods));
+
         }
         move(e){
-            // console.log(e);
-            // console.log(e.clientX,e.clientY);
-            // console.log(e.offsetX,e.offsetY);
-            var l = e.clientX - this.mask.offsetWidth/2 - this.m_img.offsetLeft;
-            var t = e.clientY - this.mask.offsetWidth/2;
-            // console.log(l,t);
+            var l = e.pageX - (this.product_section.offsetLeft + 10) - this.mask.offsetWidth/2;
+            var t = e.pageY - (this.product_section.offsetTop + 30) - this.mask.offsetWidth/2;
             if(l<0) l=0;
             if(t<0) t=0;
-            // if(l > this.m_img.offsetWidth - this.mask.offsetWidth){
-            //     l = this.m_img.offsetWidth - this.mask.offsetWidth;
-            // }
-            // if(t > this.m_img.offsetHeight - this.mask.offsetHeight){
-            //     t = this.m_img.offsetHeight - this.mask.offsetHeight;
-            // }
+            if(l > this.m_img.offsetWidth - this.mask.offsetWidth){
+                l = this.m_img.offsetWidth - this.mask.offsetWidth;
+            }
+            if(t > this.m_img.offsetHeight - this.mask.offsetHeight){
+                t = this.m_img.offsetHeight - this.mask.offsetHeight;
+            }
             this.mask.style.left = l + "px";
             this.mask.style.top = t + "px";
-            // var imgL = l/(this.m_img.offsetWidth - this.mask.offsetWidth) * (this.l_img_box.offsetWidth - this.l_img.offsetWidth );
-            // var imgT = t/(this.m_img.offsetHeight - this.mask.offsetHeight) * (this.l_img_box.offsetHeight - this.l_img.offsetHeight);
-            // this.l_img.style.left = imgL + "px";
-            // this.l_img.style.top = imgT + "px";
+            var imgL = l/(this.m_img.offsetWidth - this.mask.offsetWidth) * (this.l_img_box.offsetWidth - this.l_img.offsetWidth );
+            var imgT = t/(this.m_img.offsetHeight - this.mask.offsetHeight) * (this.l_img_box.offsetHeight - this.l_img.offsetHeight);
+            this.l_img.style.left = imgL + "px";
+            this.l_img.style.top = imgT + "px";
         }
         show(){
             this.mask.style.display = "block";
@@ -128,6 +212,38 @@
                                     <img src="${that.res[0].img}" alt="" id="l_img">
                                 </div>`;
                     that.product_img.innerHTML = str;
+                    var str1 = `<h2 class="product_name">${that.res[0].name}</h2>
+                                <p class="product_goosid">编&nbsp;&nbsp;号<span id="product_goosid">${that.res[0].goodsid}</span></p>
+                                <p class="product_netContent">净含量：${that.res[0].netContent}</p>
+                                <p class="product_price">￥${that.res[0].price}.00</p>
+                                <div id="promotion">
+                                    <div class="tag_flag">促销</div>
+                                    <div class="sop_promotion_contain">
+                                        <div class="description">营养从早开始套装“买7-1”优惠活动火热进行中，签约<span class="hot">最高</span>立省<span class="hot">848元</span>！</div>
+                                        <div class="go_now"><a class="hot">立即参与</a> ></div>
+                                    </div>
+                                </div>
+                                <div id="buy_num">
+                                    <div class="tex">购买数量：</div>
+                                    <div class="buy_num">
+                                        <button id="reduce">-</button>
+                                        <input type="text" id="num" value="0">
+                                        <button id="add">+</button>
+                                    </div>
+                                </div>
+                                <div id="buy">
+                                    <div class="buy_now">立即购买</div>
+                                    <div class="add_cart">
+                                        <i class="cart"></i>
+                                        加入购物车
+                                    </div>
+                                    <div class="collection">
+                                        <div class="heart"></div>
+                                        <div class="text">收藏</div>
+                                    </div>
+                                </div>`;
+                    that.product_msg.innerHTML = str1;
+
                     that.addEvent();
                 }
             })

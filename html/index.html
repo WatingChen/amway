@@ -46,6 +46,11 @@
                     that.goodsid = target.parentNode.getAttribute("goodsId");
                     that.setMGLStorage();
                 }
+                // console.log(target.getAttribute("goodsid"));
+                if(target.className == "guess_goods_box"){
+                    that.clickgoodsid = target.getAttribute("goodsid");
+                    console.log(that.clickgoodsid);
+                }
             },false);
         }
         setMGLStorage(){
@@ -175,7 +180,7 @@
                         let str = "";
                         let length = myres.length;
                         for(var i=0;i<length;i++){
-                            str += `<div class="guess_goods_box">
+                            str += `<div class="guess_goods_box" goodsId="${myres[i].goodsid}">
                                         <div class="guess_goods">
                                             <img src="${myres[i].img}" alt="" class="guess_goods_img">
                                         </div>
