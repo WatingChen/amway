@@ -371,6 +371,120 @@ nav{
     }
 }
 
+#brand{
+    .cat_name{
+        padding: 20px 0;
+        .every_brand{
+            font:300 28px/2 "";
+            span{
+                float: right;
+                font:300 18px/2 "";
+                color: #555;
+                i{
+                    font-style: normal;
+                }
+            }
+        }
+    }
+    .brand_content{
+        display: flex;
+        justify-content: space-between;
+        .brand_img{
+            width: 266px;
+            height: 520px;
+            img{
+                width: 266px;
+                height: 520px;
+            }
+        }
+        .brand_some{
+            margin-left:20px; 
+            flex: 1;
+            .brand_classes{
+                background: #fff;
+                padding: 20px;
+                margin-bottom:10px; 
+                ul{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    li{
+                        font-size: 18px;
+                        text-align: center;
+                        flex: 1;
+                        padding: 20px;
+                    }
+                }
+            }
+            .brand_some_products{
+                
+                ul{
+                    overflow: hidden;
+                    li{
+                        float: left;
+                        display: flex;
+                        width: 50%;
+                        box-sizing: border-box;
+                        background: #fff;
+                        padding: 10px;
+                        border-right: 10px solid #f5f5f5;
+                        border-bottom: 10px solid #f5f5f5;
+                        .left{
+                            flex: 1;
+                            padding: 30px 0;
+                            h2{
+                                font: 18px/2 "";
+                            }
+                            p{
+                                border-top: 1px solid #eee;
+                                font:16px/2 "";
+                                color: #757b82;
+                                width: 180px;
+                            }
+                            .more{
+                                font: 16px/3 "";
+                                color: #0b6527;
+                            }
+                        }
+                        .right{
+                            width: 160px;
+                            height: 160px;
+                            img{
+                                width: 160px;
+                                height: 160px;
+                                display: block;
+                            }
+                        }
+                    }
+                    li:nth-child(2n){
+                        border-right:0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#row{
+    position: fixed;
+    z-index: 99999;
+    left: 10px;
+    top:50%;
+    ul{
+        li{
+            text-align: center;
+            width: 20px;
+            height: 20px;
+            background: rgba(0,0,0,.3);
+            padding: 10px;
+            margin: 10px 0;
+            a{
+                color: #222;
+            }
+        }
+    }
+}
+
 #footer_nav{
     height: 350px;
     padding-top:15px; 

@@ -18,42 +18,59 @@
 
     <section id="guess_u_like"></section>
 
-    <!-- <section id="brand1">
+    <section id="brand">
         <div class="margin">
-            <div class="cat-name">
-                <h2 class="every_brand">
-                    纽崔莱
-                    <span>
-                        更多
-                        <i></i>
-                    </span>
-                </h2>
-            </div>
-            <div class="brand_content">
-                <div class="brand_img"><img src="https://staticd.amway.com.cn/medias/sys_master/images/images/h47/hea/8998011928606/PC-266-520.jpg" alt=""></div>
-                <div class="brand_some">
-                    <div class="brand_classes">
-                        <ul>
-                            <li>基础营养系列</li>
-                            <li>功能保健系列</li>
-                            <li>体重管理系列</li>
-                            <li>儿童成长系列</li>
-                        </ul>
+            <!-- <div class="box">
+                <div class="cat_name">
+                    <h2 class="every_brand">
+                        纽崔莱
+                        <span>
+                            更多
+                            <i>&gt;&gt;</i>
+                        </span>
+                    </h2>
+                </div>
+                <div class="brand_content">
+                    <div class="brand_img">
+                        <img src="https://staticd.amway.com.cn/medias/sys_master/images/images/h47/hea/8998011928606/PC-266-520.jpg" alt="">
                     </div>
-                    <div class="brand_some_products">
-                        <ul>
-                            <li>基础营养系列</li>
-                            <li>功能保健系列</li>
-                            <li>体重管理系列</li>
-                            <li>儿童成长系列</li>
-                        </ul>
+                    <div class="brand_some">
+                        <div class="brand_classes">
+                            <ul>
+                                <li>基础营养系列</li>
+                                <li>功能保健系列</li>
+                                <li>体重管理系列</li>
+                                <li>儿童成长系列</li>
+                            </ul>
+                        </div>
+                        <div class="brand_some_products">
+                            <ul>
+                                <li>
+                                    <div class="left">
+                                        <h2>纽崔莱®钙镁片90片</h2>
+                                        <p>植物营养素 钙镁铜锰锌</p>
+                                        <div class="more">
+                                            <span>了解更多&gt;&gt;</span>
+                                            <i></i>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <img src="https://staticd.amway.com.cn/medias/sys_master/images/images/h4e/h88/9016046911518/24104-1-1200Wx1200H-200Wx200H.jpg" alt="">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
-    </section> -->
+    </section>
 
-    <section id="row"></section>
+    <section id="row">
+        <ul>
+            <!-- <li><a href="#box1">1</a></li> -->
+        </ul>
+    </section>
 
     <div id="footer"></div>
 </body>
@@ -66,8 +83,76 @@
         constructor(){
             this.userAllMsg = localStorage.getItem("userMsg") ? JSON.parse(localStorage.getItem("userMsg")) : [{pass:"",onoff:0}];
             this.guess_u_like = document.querySelector("#guess_u_like");
+
+            this.brand_margin = document.querySelector("#brand .margin");
+
+            this.rowul = document.querySelector("#row ul");
             
+            this.brandDisplay();
             this.init();
+        }
+        brandDisplay(){
+            var that = this;
+            $.ajax({
+                url:"http://localhost:82/json/brandGoods.json",
+                success:function(res){
+                    that.res = JSON.parse(res);
+                    // console.log(that.res);
+                    var length = that.res.length;
+                    var str = "";
+                    var str1 = "";
+                    var rowStr = "";
+                    for(var i=0;i<4;i++){
+                        str1 += `<li>
+                                    <div class="left">
+                                        <h2>${that.res[i].h2}</h2>
+                                        <p>${that.res[i].p}</p>
+                                        <div class="more">
+                                            <span>了解更多&gt;&gt;</span>
+                                            <i></i>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <img src="${that.res[i].img}" alt="">
+                                    </div>
+                                </li>`;
+                    }
+                    for(var i=0;i<length;i++){
+                        str += `<div id="box${i+1}">
+                                    <div class="cat_name">
+                                        <h2 class="every_brand">
+                                            ${that.res[i].brand_name}
+                                            <span>
+                                                更多
+                                                <i>&gt;&gt;</i>
+                                            </span>
+                                        </h2>
+                                    </div>
+                                    <div class="brand_content">
+                                        <div class="brand_img">
+                                            <img src="${that.res[i].brand_img}" alt="">
+                                        </div>
+                                        <div class="brand_some">
+                                            <div class="brand_classes">
+                                                <ul>
+                                                    <li>${that.res[i].series1}</li>
+                                                    <li>${that.res[i].series2}</li>
+                                                    <li>${that.res[i].series3}</li>
+                                                    <li>${that.res[i].series4}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="brand_some_products">
+                                                <ul>${str1}</ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+                        rowStr += `<li><a href="#box${i+1}">${i+1}</a></li>`;
+                    }
+                    that.brand_margin.innerHTML = str;
+                    that.rowul.innerHTML = rowStr;
+                }
+            })
         }
         addEvent(){
             this.userName = document.querySelector("#userName");
