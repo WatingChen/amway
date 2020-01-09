@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>搜索页</title>
+    <title>商品列表页</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/goodsdetails.css">
     <link rel="stylesheet" href="../css/nav.css">
@@ -41,7 +41,7 @@
     class Search{
         constructor(){
             this.userAllMsg = localStorage.getItem("userMsg") ? JSON.parse(localStorage.getItem("userMsg")) : [{pass:"",onoff:0}];
-            this.searchkeywards = localStorage.getItem("searchkeywards") ? JSON.parse(localStorage.getItem("searchkeywards")) : {"keywards":""};
+            this.searchkeywards = localStorage.getItem("splbName") ? JSON.parse(localStorage.getItem("splbName")) : {"splbName":""};
             this.init();
         }
         searchDisplay(){
@@ -53,6 +53,7 @@
                     var length = that.res.length;
                     var str = "";
                     for(var i=0;i<that.res.length;i++){
+                        // if((that.res[i].searchKeywords).indexOf(that.keywards) != -1){
                         if((that.res[i].searchKeywords).indexOf(that.keywards) != -1){
                             str += `<li goodsid="${that.res[i].goodsid}">
                                         <a title="查看详情">
@@ -72,11 +73,12 @@
             })
         }
         display(){
-            $("nav").find("#txt").val(this.keywards);
-            $("header").find("#txt").val(this.keywards);
+            // $("nav").find("#txt").val(this.keywards);
+            // $("header").find("#txt").val(this.keywards);
         }
         addEvent(){
-            this.keywards = this.searchkeywards.keywards;
+            this.keywards = this.searchkeywards.splbName;
+            // console.log(this.keywards);
             this.userName = document.querySelector("#userName");
             this.display();
             var that = this;
@@ -136,7 +138,7 @@
             //     return false;
             // })
             // ==========选择地址==========
-            
+
             // ==========进入购物车==========
             $("header").find("#cart").click(function(){
                 if(that.loginOnOff){

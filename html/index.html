@@ -221,6 +221,28 @@
                 return false;//不要这句会有点卡顿
             })
             // ==========回到顶部==========
+
+            // ==========进入购物车==========
+            $("header").find("#cart").click(function(){
+                if(that.loginOnOff){
+                    $(this).attr("href","shop_cart.html");
+                }else{
+                    $(this).attr("href","login.html");
+                }
+            })
+            // ==========进入购物车==========
+            
+            $("nav").find(".li-first").click(function(){
+                // console.log(1);
+                // console.log($(this).index());
+                var theName = $(this).children("a").text();
+                console.log(theName);
+                var theLB = {
+                    splbName:theName
+                }
+                localStorage.setItem("splbName",JSON.stringify(theLB));
+                location.assign("spliebiao.html","_blank");
+            })
         }
 
         init(){
@@ -304,11 +326,11 @@
 
                 // ==========用户是否登录==========
                 that.i = 0;
-                var loginOnOff = that.userAllMsg.some((value,index)=>{
+                that.loginOnOff = that.userAllMsg.some((value,index)=>{
                     that.i = index;
                     return value.onoff != 0;
                 })
-                if(loginOnOff){
+                if(that.loginOnOff){
                     $("header").find(".welcome").css({display:"none"}).end().find(".welcome_1").css({display:"block"}).find("span").html(that.userAllMsg[that.i].user);
                 }else{
                     $("header").find(".welcome").css({display:"block"}).end().find(".welcome_1").css({display:"none"});
@@ -322,34 +344,41 @@
                 })
                 // ==========用户是否登录==========
 
-                // ==========购物车数量==========
-                // console.log(that.userAllMsg[i].user);
-                var goodsMsg = localStorage.getItem(`${that.userAllMsg[that.i].user}goodsMsg`) ? JSON.parse(localStorage.getItem(`${that.userAllMsg[that.i].user}goodsMsg`)) : [];
-                // console.log(goodsMsg);
-                var cartNum = 0;
-                for(var i=1;i<goodsMsg.length;i++){
-                    // console.log(goodsMsg[i].num);
-                    cartNum += goodsMsg[i].num*1;
+                if(that.loginOnOff){
+                    // ==========购物车数量==========
+                    // console.log(that.userAllMsg[i].user);
+                    var goodsMsg = localStorage.getItem(`${that.userAllMsg[that.i].user}goodsMsg`) ? JSON.parse(localStorage.getItem(`${that.userAllMsg[that.i].user}goodsMsg`)) : [];
+                    // console.log(goodsMsg);
+                    var cartNum = 0;
+                    for(var i=1;i<goodsMsg.length;i++){
+                        // console.log(goodsMsg[i].num);
+                        cartNum += goodsMsg[i].num*1;
+                    }
+                    // console.log(cartNum);
+                    if(cartNum>100){
+                        cartNum = "99+";
+                        $("header").find(".cart_num").css({
+                            height: "23px",
+                            width: "23px",
+                            lineHeight: "23px",
+                            right:"-5px",
+                            top:"-5px"
+                        });
+                    }
+                    $("header").find(".cart_num").html(cartNum);
+                    // ==========购物车数量==========
                 }
-                // console.log(cartNum);
-                if(cartNum>100){
-                    cartNum = "99+";
-                    $("header").find(".cart_num").css({
-                        height: "23px",
-                        width: "23px",
-                        lineHeight: "23px",
-                        right:"-5px",
-                        top:"-5px"
-                    });
-                }
-                $("header").find(".cart_num").html(cartNum);
-                // ==========购物车数量==========
             });
 // ===========================================================
 
 
             $("nav").load("http://localhost:82/html/nav.html",function(){
-                
+                // $("nav").find(".li-first").click(function(){
+                //     console.log(1);
+                //     // console.log($(this));
+                //     var theName = $("nav").find("a").text;
+                //     console.log(theName);
+                // })
             });
 
 
