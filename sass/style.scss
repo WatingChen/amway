@@ -173,6 +173,9 @@ header{
                     padding:0 20px;
                     .areas-v{
                         padding:0 5px;
+                        span{
+                            cursor: pointer;
+                        }
                     }
                 }
             }
@@ -216,6 +219,7 @@ header{
                 .search{
                     width:30px;
                     height:30px;
+                    cursor: pointer;
                 }
             }
         }
@@ -298,6 +302,7 @@ nav{
             .search{
                 width:30px;
                 height:30px;
+                cursor: pointer;
             }
         }
     }
@@ -324,6 +329,7 @@ nav{
         }
         a{
             display: inline-block;
+            cursor: pointer;
         }
         .guess_goods_box{
             float: left;
@@ -473,12 +479,16 @@ nav{
     ul{
         li{
             text-align: center;
-            width: 20px;
-            height: 20px;
+            width: 40px;
+            height: 40px;
             background: rgba(0,0,0,.3);
-            padding: 10px;
             margin: 10px 0;
             a{
+                box-sizing: border-box;
+                padding: 10px;
+                width: 40px;
+                height: 40px;
+                display: block;
                 color: #222;
             }
         }

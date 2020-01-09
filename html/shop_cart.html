@@ -76,7 +76,7 @@
             this.shop_cart = document.querySelector("#shop_cart");
 
             this.tbody = document.querySelector("tbody");
-            this.url = "http://localhost:82/json/guess_u_like.json";
+            this.url = "http://localhost:82/json/goods.json";
             this.priceAll = document.querySelector("#priceAll");
             this.numAll = document.querySelector("#numAll");
             this.isAllParent = document.querySelector("#isAllParent");
@@ -95,6 +95,7 @@
 
         // 渲染购物车
         display(){
+            console.log(1);
             var that = this;
             this.getStorage();
             var carlength = this.goodsMsg.length;
@@ -222,6 +223,22 @@
                 localStorage.removeItem(that.str);
                 that.display();
             }
+
+            $("header").find(".area-shi-ul").on("click","li",function(){
+                $("header").find(".localname").text($(this).find("span").text());
+            })
+            $("nav").on("click",".search",function(){
+                var keywards = $("nav").find("#txt").val();
+                var keywardsobj = {keywards:keywards};
+                localStorage.setItem("searchkeywards",JSON.stringify(keywardsobj));
+                open("search.html","_blank");
+            })
+            $("header").on("click",".search",function(){
+                var keywards = $("header").find("#txt").val();
+                var keywardsobj = {keywards:keywards};
+                localStorage.setItem("searchkeywards",JSON.stringify(keywardsobj));
+                open("search.html","_blank");
+            })
         }
 
         delete(){
@@ -301,6 +318,7 @@
                     location.reload();
                 })
                 that.display();
+                that.addEvent();
             });
             $("nav").load("http://localhost:82/html/nav.html",function(){
                 $("nav").find(".nav_list_flex").hover(function(){

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>搜索页</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/goodsdetails.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/search.css">
+</head>
+<body>
+    <div id="header"></div>
+    <header></header>
+    <nav></nav>
+    <section id="search_page">
+        <div class="margin">
+            <ul>
+                <!-- <li>
+                    <a href="">
+                        <div class="goods">
+                            <img src="" alt="">
+                            <h3>1</h3>
+                            <p>2</p>
+                            <span>3</span>
+                        </div>
+                    </a>
+                    <input type="button" id="addBtn" value="加入购物车">
+                </li> -->
+            </ul>
+        </div>
+    </section>
+    
+    <div id="footer"></div>
+</body>
+<script src="../libs/jquery.js"></script>
+<script src="../libs/ajax.js"></script>
+<script>
+
+    class Search{
+        constructor(){
+            this.userAllMsg = localStorage.getItem("userMsg") ? JSON.parse(localStorage.getItem("userMsg")) : [{pass:"",onoff:0}];
+            this.searchkeywards = localStorage.getItem("searchkeywards") ? JSON.parse(localStorage.getItem("searchkeywards")) : {"keywards":""};
+            this.init();
+        }
+        searchDisplay(){
+            var that = this;
+            $.ajax({
+                url:"http://localhost:82/json/goods.json",
+                success:function(res){
+                    that.res = JSON.parse(res);
+                    var length = that.res.length;
+                    var str = "";
+                    for(var i=0;i<that.res.length;i++){
+                        if((that.res[i].searchKeywords).indexOf(that.keywards) != -1){
+                            str += `<li goodsid="${that.res[i].goodsid}">
+                                        <a>
+                                            <div class="goods">
+                                                <img src="${that.res[i].img}" alt="">
+                                                <h3>${that.res[i].name}</h3>
+                                                <p>${that.res[i].searchKeywords}</p>
+                                                <span>￥ ${that.res[i].price}.00</span>
+                                            </div>
+                                        </a>
+                                        <input type="button" id="addBtn" value="加入购物车">
+                                    </li>`;
+                        }
+                    }
+                    $("#search_page").find("ul").html(str);
+                }
+            })
+        }
+        display(){
+            $("nav").find("#txt").val(this.keywards);
+            $("header").find("#txt").val(this.keywards);
+        }
+        addEvent(){
+            this.keywards = this.searchkeywards.keywards;
+            this.userName = document.querySelector("#userName");
+            this.display();
+            var that = this;
+            
+            // 点击搜索
+            $("nav").on("click",".search",function(){
+                var keywards = $("nav").find("#txt").val();
+                var keywardsobj = {keywards:keywards};
+                localStorage.setItem("searchkeywards",JSON.stringify(keywardsobj));
+                location.reload();
+            })
+            $("header").on("click",".search",function(){
+                var keywards = $("header").find("#txt").val();
+                var keywardsobj = {keywards:keywards};
+                localStorage.setItem("searchkeywards",JSON.stringify(keywardsobj));
+                location.reload();
+            })
+            // ==============================================
+            $("#search_page").on("click","#addBtn",function(){
+                that.goodsid = $(this).parent().attr("goodsid");
+                that.goodsNum = 1;
+                that.setMGLStorage();
+            })
+            $("#search_page").on("click","a",function(){
+                $(this).attr("href","goodsdetails.html");
+                var goodsid = $(this).parent().attr("goodsid");
+                // console.log(goodsid);
+                localStorage.setItem("a_goodsid",goodsid);
+            })
+        }
+        setMGLStorage(){
+            var str = "";
+            str = this.userName.innerHTML + "goodsMsg";
+            this.mygoods = localStorage.getItem(str) ? JSON.parse(localStorage.getItem(str)) : [{user:""}];
+            [{user:""},{goodsid:"",num:""}]
+            // this.mygoods = localStorage.getItem(str) ? JSON.parse(localStorage.getItem(str)) : [];
+            var goodsLength = this.mygoods.length;
+            var i = 0;
+            var onoff = this.mygoods.some((value,index)=>{
+                i = index;
+                return value.id == this.goodsid;
+            })
+            if(onoff){
+                if(this.goodsNum != 1){
+                    this.mygoods[i].num = this.mygoods[i].num * 1 + this.goodsNum*1;
+                }else{
+                    this.mygoods[i].num++;
+                }
+            }else{
+                if(!this.mygoods[0].user){
+                    this.mygoods[0] = {
+                        user:this.userName.innerHTML
+                    }
+                }
+                this.mygoods.push({
+                    id:this.goodsid,
+                    num:this.goodsNum
+                });
+            }
+            
+            localStorage.setItem(str,JSON.stringify(this.mygoods));
+
+        }
+        init(){
+            var that = this;
+            $("header").load("http://localhost:82/html/header.html",function(){
+                var localOnOff = 0;
+                $(".header_local").on("click",function(){
+                    if(localOnOff == 0){
+                        $(".header_local").find(".local").addClass("active");
+                        $(".delivery-to").css({
+                            display:"block"
+                        })
+                        localOnOff = 1;
+                    }else{
+                        $(".header_local").find(".local").removeClass("active");
+                        $(".delivery-to").css({
+                            display:"none"
+                        })
+                        localOnOff = 0;
+                    }
+                })
+                let arr = ["北京市","上海市","天津市","重庆市","安徽省","安徽省安庆市","福建省","甘肃省","广东省","广西自治区","贵州省","海南省","河北省","河南省","黑龙江省","湖北省","湖南省","吉林省","江苏省","江西省","辽宁省","宁夏自治区","青海省","山东省","山西省","陕西省","四川省","西藏自治区","新疆自治区","云南省","浙江省","内蒙古自治区（西部）","内蒙古自治区（中部）","内蒙古自治区（北部）"];
+                let str = "";
+                let length = arr.length;
+                // console.log(length);
+                for(var i=0;i<length;i++){
+                    str += `<li style="height: auto;">
+                                <div class="areas-v">
+                                    <span>${arr[i]}</span>
+                                </div>
+                            </li>`;
+                }
+                $(".delivery-to").children(".area-shi-ul").html(str);
+
+                onscroll = function(){
+                    if($(document).scrollTop() > 70){
+                        $("header").find(".header_local").css({display:"none"}).end().find(".login").css({display:"none"}).end().find(".delivery-to").css({display:"none"}).end().find(".local").removeClass("active");
+                        localOnOff = 0;
+                        // console.log($("header").find(".nav_search").length)
+                        if(!$("header").find(".nav_search").length){
+                            $("header").children(".margin").append(`<div class="nav_search">
+                                <form>
+                                    <div class="nav_search_toggle"><span>产品</span><img src="../img/arrow_down.png" alt="" class="toggle_arrow"></div>
+                                    <input type="text" id="txt">
+                                    <img src="../img/search.png" alt="" class="search">
+                                </form>
+                            </div>`);
+
+                        }else{
+                            $("header").find(".nav_search").css({
+                                display:"block"
+                            })
+                        }
+                    }else if($(document).scrollTop() < 70){
+                        $("header").find(".header_local").css({display:"block"}).end().find(".login").css({display:"block"}).end().find(".nav_search").css({
+                            display:"none"
+                        })
+                    }
+                    that.display();
+                }
+                var i = 0;
+                var loginOnOff = that.userAllMsg.some((value,index)=>{
+                    i = index;
+                    return value.onoff != 0;
+                })
+                if(loginOnOff){
+                    $("header").find(".welcome").css({display:"none"}).end().find(".welcome_1").css({display:"block"}).find("span").html(that.userAllMsg[i].user);
+                }else{
+                    $("header").find(".welcome").css({display:"block"}).end().find(".welcome_1").css({display:"none"});
+                }
+                $("header").find(".exit").click(function(){
+                    that.userAllMsg[i].onoff = 0;
+                    localStorage.setItem("userMsg",JSON.stringify(that.userAllMsg));
+                    location.reload();
+                })
+            });
+
+            $("nav").load("http://localhost:82/html/nav.html",function(){
+                $("nav").find(".nav_list_flex").hover(function(){
+                    $(this).find(".accl2c-submenumd").css({
+                        display:"block"
+                    })
+                },function(){
+                    $(this).find(".accl2c-submenumd").css({
+                        display:"none"
+                    })
+                })
+                that.searchDisplay();
+                that.addEvent();
+            });
+            $("#footer").load("http://localhost:82/html/footer.html");
+        }
+    }
+
+    new Search();
+
+</script>
+</html>

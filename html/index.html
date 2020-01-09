@@ -161,6 +161,29 @@
                 localStorage.setItem("a_goodsid",$(this).attr("goodsid"));
                 open("goodsdetails.html","_blank");
             })
+
+            // 选择地址
+            $("header").find(".area-shi-ul").on("click","li",function(){
+                $("header").find(".localname").text($(this).find("span").text());
+            })
+            // $(document).on("click",function(){
+            //     $("header").find(".local").removeClass("active");
+            //     return false;
+            // })
+
+            // 搜索
+            $("nav").on("click",".search",function(){
+                var keywards = $("nav").find("#txt").val();
+                var keywardsobj = {keywards:keywards};
+                localStorage.setItem("searchkeywards",JSON.stringify(keywardsobj));
+                open("search.html","_blank");
+            })
+            $("header").on("click",".search",function(){
+                var keywards = $("header").find("#txt").val();
+                var keywardsobj = {keywards:keywards};
+                localStorage.setItem("searchkeywards",JSON.stringify(keywardsobj));
+                open("search.html","_blank");
+            })
         }
 
         init(){
@@ -196,6 +219,9 @@
                 }
                 $(".delivery-to").children(".area-shi-ul").html(str);
 // ===========================================================
+                // that.localName = document.querySelector("nav .local");
+                // that.area_shi_ul = document.querySelector("nav .area-shi-ul");
+                // that.addEvent();
 
                 // 滚动事件搜索框变动
                 onscroll = function(){
@@ -241,8 +267,6 @@
                     localStorage.setItem("userMsg",JSON.stringify(that.userAllMsg));
                     location.reload();
                 })
-                
-
             });
 // ===========================================================
 

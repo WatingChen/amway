@@ -1,0 +1,50 @@
+#search_page{
+    padding: 20px;
+    .margin{
+        width: 1095px;
+        background: #fff;
+        ul{
+            display: flex;
+            flex-wrap: wrap;
+            // justify-content: space-between;
+            li{
+                width: 200px;
+                border-right: 5px solid #f5f5f5;
+                border-bottom: 5px solid #f5f5f5;
+                // margin: 0 10px 5px 0;
+                text-align: center;
+                padding: 7px;
+                a{
+                    display: block;
+                    width: 100%;
+                    .goods{
+                        padding: 10px;
+                        img{
+                            width: 100px;
+                            height: 100px;
+                            display: block;
+                            margin: 0 auto;
+                        }
+                        h3{
+                            font: 600 20px/2 "";
+                            height: 80px;
+                            color: #555;
+                        }
+                        p{
+                            font: 14px/2 "";
+                            height: 84px;
+                            color: #858585;
+                        }
+                        span{
+                            font: 24px/2 "";
+                            color: #f00;
+                        }
+                    }
+                }
+                #addBtn{
+                    
+                }
+            }
+        }
+    }
+}

@@ -199,7 +199,8 @@
                     pass:this.register_pass.val(),
                     onoff:0
                 })
-                alert("注册成功");
+                alert("注册成功,请登录");
+                location.reload();
             }
             localStorage.setItem("userMsg",JSON.stringify(this.userMsg));
         }
