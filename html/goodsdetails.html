@@ -16,6 +16,7 @@
 
     <section id="details">
         <div class="margin">
+            <!-- <div class="addSucess"></div> -->
             <div class="header_nav">
                 <!-- <ul>
                     <li><a href="index.html">首页</a></li>
@@ -133,12 +134,29 @@
             },false)
 
             this.add_cart.addEventListener("click",function(){
+                clearTimeout(t);
                 that.goodsid = that.a_goodsid;
                 that.goodsNum = that.num.value;
+                console.log(that.goodsNum);
                 // console.log(that.goodsid)
                 // console.log(that.goodsNum);
                 // that.goodsid = that.product_goosid.innerHTML;
                 that.setMGLStorage();
+                $("#details").find(".margin").append($(`<div class="addSucess">加入购物车成功</div>`).css({
+                    position:"fixed",
+                    left:"50%",
+                    top:"50%",
+                    background:"rgba(0,0,0,.3)",
+                    color:"#f00",
+                    width:"150px",
+                    height:"100px",
+                    font:"16px/100px ''",
+                    textAlign:"center",
+                    transform:"translate(-50%,-50%)"
+                }));
+                var t = setTimeout(()=>{
+                    $("#details").find(".addSucess").remove();
+                },800)
             },false)
             $("header").find(".area-shi-ul").on("click","li",function(){
                 $("header").find(".localname").text($(this).find("span").text());
@@ -154,6 +172,20 @@
                 var keywardsobj = {keywards:keywards};
                 localStorage.setItem("searchkeywards",JSON.stringify(keywardsobj));
                 open("search.html","_blank");
+            })
+            $("nav").find("form").focusin(function(){
+                $(this).on("keydown",function(eve){
+                    if(eve.keyCode == 13){
+                        $("nav").find(".search").trigger("click");
+                    }
+                })
+            })
+            $("header").find("form").focusin(function(){
+                $(this).on("keydown",function(eve){
+                    if(eve.keyCode == 13){
+                        $("header").find(".search").trigger("click");
+                    }
+                })
             })
 
         }
@@ -332,6 +364,7 @@
                                 <form>
                                     <div class="nav_search_toggle"><span>产品</span><img src="../img/arrow_down.png" alt="" class="toggle_arrow"></div>
                                     <input type="text" id="txt">
+                                    <input type="text" id="form_control" style="display:none">
                                     <img src="../img/search.png" alt="" class="search">
                                 </form>
                             </div>`);
@@ -346,22 +379,57 @@
                             display:"none"
                         })
                     }
+                    // that.addEvent();     // 不能在这执行addEvent()!!!!会导致购物车数量增加，点击一次，触发滚动次数个的点击次数
+                    $("header").find("form").focusin(function(){
+                        $(this).on("keydown",function(eve){
+                            if(eve.keyCode == 13){
+                                $("header").find(".search").trigger("click");
+                            }
+                        })
+                    })
                 }
-                var i = 0;
+               // ==========用户是否登录==========
+               that.i = 0;
                 var loginOnOff = that.userAllMsg.some((value,index)=>{
-                    i = index;
+                    that.i = index;
                     return value.onoff != 0;
                 })
                 if(loginOnOff){
-                    $("header").find(".welcome").css({display:"none"}).end().find(".welcome_1").css({display:"block"}).find("span").html(that.userAllMsg[i].user);
+                    $("header").find(".welcome").css({display:"none"}).end().find(".welcome_1").css({display:"block"}).find("span").html(that.userAllMsg[that.i].user);
                 }else{
                     $("header").find(".welcome").css({display:"block"}).end().find(".welcome_1").css({display:"none"});
                 }
                 $("header").find(".exit").click(function(){
-                    that.userAllMsg[i].onoff = 0;
+                    // console.log(that.i);
+                    // console.log(that.userAllMsg);
+                    that.userAllMsg[that.i].onoff = 0;
                     localStorage.setItem("userMsg",JSON.stringify(that.userAllMsg));
                     location.reload();
                 })
+                // ==========用户是否登录==========
+
+                // ==========购物车数量==========
+                // console.log(that.userAllMsg[i].user);
+                var goodsMsg = localStorage.getItem(`${that.userAllMsg[that.i].user}goodsMsg`) ? JSON.parse(localStorage.getItem(`${that.userAllMsg[that.i].user}goodsMsg`)) : [];
+                // console.log(goodsMsg);
+                var cartNum = 0;
+                for(var i=1;i<goodsMsg.length;i++){
+                    // console.log(goodsMsg[i].num);
+                    cartNum += goodsMsg[i].num*1;
+                }
+                // console.log(cartNum);
+                if(cartNum>100){
+                    cartNum = "99+";
+                    $("header").find(".cart_num").css({
+                        height: "23px",
+                        width: "23px",
+                        lineHeight: "23px",
+                        right:"-5px",
+                        top:"-5px"
+                    });
+                }
+                $("header").find(".cart_num").html(cartNum);
+                // ==========购物车数量==========
             });
 
             $("nav").load("http://localhost:82/html/nav.html",function(){

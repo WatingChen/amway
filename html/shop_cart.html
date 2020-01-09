@@ -239,6 +239,20 @@
                 localStorage.setItem("searchkeywards",JSON.stringify(keywardsobj));
                 open("search.html","_blank");
             })
+            $("nav").find("form").focusin(function(){
+                $(this).on("keydown",function(eve){
+                    if(eve.keyCode == 13){
+                        $("nav").find(".search").trigger("click");
+                    }
+                })
+            })
+            $("header").find("form").focusin(function(){
+                $(this).on("keydown",function(eve){
+                    if(eve.keyCode == 13){
+                        $("header").find(".search").trigger("click");
+                    }
+                })
+            })
         }
 
         delete(){
@@ -397,7 +411,7 @@
             this.userName = this.userAllMsg[this.i].user;
             // console.log(this.userName);
             // console.log(this.str);
-            this.goodsMsg = JSON.parse(localStorage.getItem(this.str));
+            this.goodsMsg = localStorage.getItem(this.str) ? JSON.parse(localStorage.getItem(this.str)) : [];
             // console.log(this.goodsMsg);
             // var myCookie = localStorage.getItem("goodsMsg") ? JSON.parse(localStorage.getItem("goodsMsg")) : [];
             // this.myGoods = myCookie;

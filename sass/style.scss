@@ -489,9 +489,19 @@ nav{
                 width: 40px;
                 height: 40px;
                 display: block;
-                color: #222;
+                color: #fff;
             }
         }
+    }
+    #goTop{
+        cursor: pointer;
+        display: none;
+        width: 40px;
+        height: 40px;
+        background: rgba(0,0,0,.3);
+        color: #fff;
+        text-align: center;
+        line-height: 40px;
     }
 }
 
