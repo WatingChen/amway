@@ -1,5 +1,5 @@
+// console.log(1);
 define(function() {
-    // console.log(1);
     // 'use strict';
     class Home{
         constructor(){

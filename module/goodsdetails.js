@@ -3,7 +3,7 @@ define(function(){
         constructor(){
             this.userAllMsg = localStorage.getItem("userMsg") ? JSON.parse(localStorage.getItem("userMsg")) : [{pass:"",onoff:0}];
             this.ul = document.querySelector(".header_nav").children[0];
-            this.product_section = document.querySelector(".product_section")
+            this.product_section = document.querySelector(".product_section");
             this.product_img = this.product_section.children[0];
             this.product_msg = this.product_section.children[1];
             this.header_nav = document.querySelector(".header_nav");
